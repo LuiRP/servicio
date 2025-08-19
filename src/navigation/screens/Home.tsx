@@ -1,15 +1,19 @@
-import { Button, Text } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+import { Button, Text } from "@react-navigation/elements";
+import { StyleSheet, View } from "react-native";
+import {
+  createStaticNavigation,
+  useNavigation,
+} from "@react-navigation/native";
 
 export function Home() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button screen="Profile" params={{ user: 'jane' }}>
-        Go to Profile
+      <Button onPress={() => navigation.navigate("Settings")}>
+        Go to Settings
       </Button>
-      <Button screen="Settings">Go to Settings</Button>
     </View>
   );
 }
@@ -17,8 +21,8 @@ export function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     gap: 10,
   },
 });
