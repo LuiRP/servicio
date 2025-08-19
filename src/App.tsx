@@ -1,37 +1,44 @@
-import { Assets as NavigationAssets } from '@react-navigation/elements';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
-import { Asset } from 'expo-asset';
-import { createURL } from 'expo-linking';
-import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
-import { useColorScheme } from 'react-native';
-import { Navigation } from './navigation';
+// In App.js in a new project
 
-Asset.loadAsync([
-  ...NavigationAssets,
-  require('./assets/newspaper.png'),
-  require('./assets/bell.png'),
-]);
+import * as React from "react";
+import { View, Text } from "react-native";
+import {
+  createStaticNavigation,
+  useNavigation,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Button } from "@react-navigation/elements";
 
-SplashScreen.preventAutoHideAsync();
-
-const prefix = createURL('/');
-
-export function App() {
-  const colorScheme = useColorScheme();
-
-  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
-
+function HomeScreen() {
+  const navigation = useNavigation();
   return (
-    <Navigation
-      theme={theme}
-      linking={{
-        enabled: 'auto',
-        prefixes: [prefix],
-      }}
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <Text style={{ textAlign: "center" }}>Home Screen</Text>
+      <Button onPress={() => navigation.navigate("Details")}>
+        Go to Details
+      </Button>
+    </View>
   );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <Text style={{ textAlign: "center" }}>Details Screen</Text>
+    </View>
+  );
+}
+
+const RootStack = createNativeStackNavigator({
+  initialRouteName: "Home",
+  screens: {
+    Home: HomeScreen,
+    Details: DetailsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
 }
