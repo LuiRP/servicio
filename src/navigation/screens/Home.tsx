@@ -1,28 +1,38 @@
-import { Button, Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
-import {
-  createStaticNavigation,
-  useNavigation,
-} from "@react-navigation/native";
+import CalleSelector from "../../components/CalleSelector";
+import FamiliasTable from "../../components/FamiliasTable";
+import { Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button onPress={() => navigation.navigate("Settings")}>
-        Go to Settings
+    <View style={styles.viewContainer}>
+      <View>
+        <CalleSelector></CalleSelector>
+        <FamiliasTable></FamiliasTable>
+      </View>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate("Crear Familia")}
+      >
+        Añadir familia
       </Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  viewContainer: {
+    padding: 8,
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 10,
+    gap: 16,
+    flexDirection: "column",
+    flexGrow: 1,
+    justifyContent: "space-between",
+  },
+  button: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });
