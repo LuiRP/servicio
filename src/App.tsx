@@ -9,6 +9,8 @@ import { MD3LightTheme as DefaultTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FamiliaCrearModal from "./navigation/screens/FamiliaCrearModal";
 import * as React from "react";
+import { Operativos } from "./navigation/screens/Operativos";
+import OperativosCrear from "./navigation/screens/OperativosCrear";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
@@ -60,14 +62,23 @@ function TabNavigator() {
               typeof options.tabBarLabel === "string"
                 ? options.tabBarLabel
                 : typeof options.title === "string"
-                ? options.title
-                : route.name;
+                  ? options.title
+                  : route.name;
 
             return label;
           }}
         />
       )}
     >
+      <Tab.Screen
+        name="Operativos"
+        component={Operativos}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="book" color={color} size={26} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Familias"
         component={Home}
@@ -121,6 +132,10 @@ export default function App() {
               <RootStack.Screen
                 name="Crear Familia"
                 component={FamiliaCrearModal}
+              />
+              <RootStack.Screen
+                name="Crear Operativos"
+                component={OperativosCrear}
               />
             </RootStack.Group>
           </RootStack.Navigator>
