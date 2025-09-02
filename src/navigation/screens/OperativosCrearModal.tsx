@@ -4,12 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, TextInput } from "react-native-paper";
 import { PaperSelect } from "react-native-paper-select";
 
-const OperativosCrear = () => {
+const OperativosCrearModal = () => {
   const navigation = useNavigation();
 
-  const [numeroCasa, setNumeroCasa] = React.useState("");
-  const [jefeFamilia, setJefeFamilia] = React.useState("");
-  const [numeroPersonas, setNumeroPersonas] = React.useState("");
+  const [nombreOperativo, setNombreOperativo] = React.useState("");
+  const [fechaOperativo, setFechaOperativo] = React.useState("");
+  const [tipoOperativo, setTipoOperativo] = React.useState("");
+  const [descripcionOperativo, setDescripcionOperativo] = React.useState("");
   const [bombonas1, setBombonas1] = React.useState({
     value: "",
     list: [
@@ -37,27 +38,38 @@ const OperativosCrear = () => {
     <View style={styles.viewContainer}>
       <View style={styles.inputContainer}>
         <TextInput
-          label="Número de Casa"
-          value={numeroCasa}
-          onChangeText={(numeroCasa) => setNumeroCasa(numeroCasa)}
+          label="Nombre del Operativo"
+          value={nombreOperativo}
+          onChangeText={(nombreOperativo) =>
+            setNombreOperativo(nombreOperativo)
+          }
         />
 
         <TextInput
-          label="Jefe de Familia"
-          value={jefeFamilia}
-          onChangeText={(jefeFamilia) => setJefeFamilia(jefeFamilia)}
+          label="Fecha del Operativo"
+          value={fechaOperativo}
+          onChangeText={(fechaOperativo) => setFechaOperativo(fechaOperativo)}
         />
 
         <TextInput
-          label="Número de personas en la Familia"
-          value={numeroPersonas}
-          onChangeText={(numeroPersonas) => setNumeroPersonas(numeroPersonas)}
+          label="Tipo de Operativo"
+          value={tipoOperativo}
+          onChangeText={(tipoOperativo) => setTipoOperativo(tipoOperativo)}
+          keyboardType="numeric"
+        />
+
+        <TextInput
+          label="Descripción del Operativo"
+          value={descripcionOperativo}
+          onChangeText={(descripcionOperativo) =>
+            setDescripcionOperativo(descripcionOperativo)
+          }
           keyboardType="numeric"
         />
 
         <View style={{ gap: 3 }}>
           <PaperSelect
-            label="Tipo de la Primera Bombona"
+            label="Familias"
             value={bombonas1.value}
             onSelection={(value: any) => {
               setBombonas1({
@@ -72,35 +84,19 @@ const OperativosCrear = () => {
             errorText={bombonas1.error}
             multiEnable={false}
           />
-          <PaperSelect
-            label="Tipo de la Segunda Bombona "
-            value={bombonas2.value}
-            onSelection={(value: any) => {
-              setBombonas2({
-                ...bombonas2,
-                value: value.text,
-                selectedList: value.selectedList,
-                error: "",
-              });
-            }}
-            arrayList={[...bombonas2.list]}
-            selectedArrayList={bombonas2.selectedList}
-            errorText={bombonas2.error}
-            multiEnable={false}
-          />
         </View>
       </View>
       <Button
         mode="contained"
-        onPress={() => navigation.navigate("Crear Familia")}
+        onPress={() => navigation.navigate("Crear Operativo")}
       >
-        Añadir familia
+        Crear Operativo
       </Button>
     </View>
   );
 };
 
-export default OperativosCrear;
+export default OperativosCrearModal;
 
 const styles = StyleSheet.create({
   viewContainer: {

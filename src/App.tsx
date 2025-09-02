@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FamiliaCrearModal from "./navigation/screens/FamiliaCrearModal";
 import * as React from "react";
 import { Operativos } from "./navigation/screens/Operativos";
-import OperativosCrear from "./navigation/screens/OperativosCrear";
+import OperativosCrearModal from "./navigation/screens/OperativosCrearModal";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
@@ -89,7 +89,7 @@ function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Configuración"
         component={Settings}
         options={{
           tabBarIcon: ({ color }) => (
@@ -135,7 +135,7 @@ export default function App() {
               />
               <RootStack.Screen
                 name="Crear Operativos"
-                component={OperativosCrear}
+                component={OperativosCrearModal}
               />
             </RootStack.Group>
           </RootStack.Navigator>
