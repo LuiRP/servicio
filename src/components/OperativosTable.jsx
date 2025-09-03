@@ -1,78 +1,51 @@
 import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-import { DataTable } from "react-native-paper";
+import { StyleSheet, View, Text } from "react-native";
+import { DataTable, IconButton } from "react-native-paper";
 
-const OperativosTable = () => {
-  const [page, setPage] = React.useState(0);
-  const [numberOfItemsPerPageList] = React.useState([2, 3, 4]);
-  const [itemsPerPage, onItemsPerPageChange] = React.useState(
-    numberOfItemsPerPageList[0]
-  );
-
-  const [items] = React.useState([
-    {
-      key: 1,
-      name: "Cupcake",
-      calories: 356,
-      fat: 16,
-    },
-    {
-      key: 2,
-      name: "Eclair",
-      calories: 262,
-      fat: 16,
-    },
-    {
-      key: 3,
-      name: "Frozen yogurt",
-      calories: 159,
-      fat: 6,
-    },
-    {
-      key: 4,
-      name: "Gingerbread",
-      calories: 305,
-      fat: 3.7,
-    },
-  ]);
-
-  const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, items.length);
-
-  React.useEffect(() => {
-    setPage(0);
-  }, [itemsPerPage]);
+const OperativosTable = ({ index = 0 }) => {
+  const navigation = useNavigation();
 
   return (
-    <DataTable>
-      <DataTable.Header>
-        <DataTable.Title>Dessert</DataTable.Title>
-        <DataTable.Title numeric>Calories</DataTable.Title>
-        <DataTable.Title numeric>Fat</DataTable.Title>
-      </DataTable.Header>
-
-      {items.slice(from, to).map((item) => (
-        <DataTable.Row key={item.key}>
-          <DataTable.Cell>{item.name}</DataTable.Cell>
-          <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-          <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
-        </DataTable.Row>
-      ))}
-
-      <DataTable.Pagination
-        page={page}
-        numberOfPages={Math.ceil(items.length / itemsPerPage)}
-        onPageChange={(page) => setPage(page)}
-        label={`${from + 1}-${to} of ${items.length}`}
-        numberOfItemsPerPageList={numberOfItemsPerPageList}
-        numberOfItemsPerPage={itemsPerPage}
-        onItemsPerPageChange={onItemsPerPageChange}
-        showFastPaginationControls
-        selectPageDropdownLabel={"Rows per page"}
-      />
+    <DataTable style={styles.tableData}>
+      <DataTable.Row onPress={() => navigation.navigate("Crear Operativos")}>
+        <DataTable.Cell>
+          <View>
+            <Text style={styles.cellText}>Nombre del Operativo</Text>
+          </View>
+        </DataTable.Cell>
+        <DataTable.Cell>
+          <View style={styles.rowContent}>
+            <Text style={styles.titleText}>Fecha</Text>
+            <IconButton
+              icon="delete"
+              size={20}
+              iconColor="rgb(186, 26, 26)"
+              onPress={() => console.log("Sexito")}
+            />
+          </View>
+        </DataTable.Cell>
+      </DataTable.Row>
     </DataTable>
   );
 };
 
 export default OperativosTable;
+
+const styles = StyleSheet.create({
+  tableData: {
+    marginTop: 15,
+    borderRadius: 15,
+    backgroundColor: "rgb(240, 219, 255)",
+  },
+  cellText: {
+    fontWeight: "bold",
+  },
+  rowContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  titleText: {
+    flex: 1,
+  },
+});

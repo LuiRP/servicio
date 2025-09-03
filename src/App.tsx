@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider, BottomNavigation, PaperProvider } from "react-native-paper";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Home } from "./navigation/screens/Home";
-import { Settings } from "./navigation/screens/Settings";
+import Settings from "./navigation/screens/Settings";
 import { SQLiteProvider } from "expo-sqlite";
 import { MD3LightTheme as DefaultTheme } from "react-native-paper";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
